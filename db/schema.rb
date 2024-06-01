@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_01_153836) do
+ActiveRecord::Schema.define(version: 2024_06_01_154545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,23 @@ ActiveRecord::Schema.define(version: 2024_06_01_153836) do
     t.index ["item_id"], name: "index_prices_on_item_id"
   end
 
+  create_table "stocks", force: :cascade do |t|
+    t.bigint "item_id"
+    t.integer "initial_qty"
+    t.integer "current_quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_stocks_on_item_id"
+  end
+
+  create_table "taxes", force: :cascade do |t|
+    t.decimal "percentage"
+    t.integer "year"
+    t.boolean "state", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "uoms", force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -59,4 +76,5 @@ ActiveRecord::Schema.define(version: 2024_06_01_153836) do
 
   add_foreign_key "items", "uoms"
   add_foreign_key "prices", "items"
+  add_foreign_key "stocks", "items"
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :taxes
   resources :stocks
   resources :prices
   resources :items

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  percentage: 9.99
+  year: 1
+  state: false
+
+two:
+  percentage: 9.99
+  year: 1
+  state: false
