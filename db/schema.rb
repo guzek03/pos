@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_01_152713) do
+ActiveRecord::Schema.define(version: 2024_06_01_153836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(version: 2024_06_01_152713) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "prices", force: :cascade do |t|
+    t.bigint "item_id"
+    t.decimal "price", precision: 15, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_prices_on_item_id"
+  end
+
   create_table "uoms", force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -50,4 +58,5 @@ ActiveRecord::Schema.define(version: 2024_06_01_152713) do
   end
 
   add_foreign_key "items", "uoms"
+  add_foreign_key "prices", "items"
 end
