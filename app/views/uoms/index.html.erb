@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Uoms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Name</th>
+      <th>State</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @uoms.each do |uom| %>
+      <tr>
+        <td><%= uom.code %></td>
+        <td><%= uom.name %></td>
+        <td><%= uom.state %></td>
+        <td><%= link_to 'Show', uom %></td>
+        <td><%= link_to 'Edit', edit_uom_path(uom) %></td>
+        <td><%= link_to 'Destroy', uom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Uom', new_uom_path %>
