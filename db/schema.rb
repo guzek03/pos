@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_01_151213) do
+ActiveRecord::Schema.define(version: 2024_06_01_151707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "code_sequences", force: :cascade do |t|
+    t.string "code"
+    t.integer "year"
+    t.integer "sequence"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "uoms", force: :cascade do |t|
     t.string "code"
