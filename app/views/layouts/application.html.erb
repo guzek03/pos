@@ -10,6 +10,43 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="app">
+      <% if user_signed_in? %>
+        <div class="main-wrapper main-wrapper-1">
+          <div class="navbar-bg"></div>
+          <%= render "layouts/partials/header" %>
+          <%= render "layouts/partials/sidebar" %>
+          <div class="main-content">
+            <section class="section">
+              <%= yield %>
+            </section>
+          </div>
+          <%= render "layouts/partials/footer" %>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
+    </div>
+
+    <script>
+      if("<%= notice %>" != "") {
+        setTimeout(function () {
+          iziToast.success({
+            title: 'Information',
+            message: '<%= notice %>',
+            position: 'topRight'
+          });
+        }, 500);
+      } else
+      if("<%= alert %>" != "") {
+        setTimeout(function () {
+          iziToast.error({
+            title: 'Information',
+            message: '<%= alert %>',
+            position: 'topRight'
+          });
+        }, 500);
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,15 @@
+<div class="main-sidebar sidebar-style-2">
+  <aside id="sidebar-wrapper">
+    <div class="sidebar-brand">
+      <a href="<%= root_path %>">
+        <span class="logo-name">POS</span>
+      </a>
+    </div>
+    <ul class="sidebar-menu">
+      <li class="menu-header">Main</li>
+      <li class="dropdown <%= params[:controller] == 'home' ? 'active' : '' %>">
+        <a href="<%= root_path %>" class="nav-link"><i class="fab fa-dashcube"></i><span>Dashboard</span></a>
+      </li>
+    </ul>
+  </aside>
+</div>

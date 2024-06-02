@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   
+  root 'home#index'
+
   resources :taxes
   resources :stocks
   resources :prices
