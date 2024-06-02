@@ -10,6 +10,14 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+ *= require css/app.min
+ *= require datatables/datatables.min
+ *= require datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min
+ *= require izitoast/css/iziToast.min
+ *= require select2/dist/css/select2.min
+ *= require css/style
+ *= require css/components
+ *= require css/custom
+ * require_tree .
+ * require_self
  */
