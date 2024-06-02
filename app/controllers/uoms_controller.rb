@@ -25,7 +25,7 @@ class UomsController < ApplicationController
 
     respond_to do |format|
       if @uom.save
-        format.html { redirect_to uom_url(@uom), notice: "Uom was successfully created." }
+        format.html { redirect_to uoms_url, notice: "Uom was successfully created." }
         format.json { render :show, status: :created, location: @uom }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class UomsController < ApplicationController
   def update
     respond_to do |format|
       if @uom.update(uom_params)
-        format.html { redirect_to uom_url(@uom), notice: "Uom was successfully updated." }
+        format.html { redirect_to uoms_url, notice: "Uom was successfully updated." }
         format.json { render :show, status: :ok, location: @uom }
       else
         format.html { render :edit, status: :unprocessable_entity }

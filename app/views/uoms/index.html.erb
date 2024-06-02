@@ -1,31 +1,59 @@
-<p id="notice"><%= notice %></p>
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>UoM</h4>
+            <div class="card-header-action">
+              <a href="<%= new_uom_path %>" class="btn btn-icon icon-left btn-primary">
+                <i class="fas fa-plus"></i> Tambah
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                <thead>
+                  <tr class="text-center">
+                    <th nowrap>Code</th>
+                    <th nowrap>Name</th>
+                    <th nowrap>STATUS</th>
+                    <th nowrap>AKSI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @uoms.each do |uom| %>
+                    <tr class="text-center">
+                      <td nowrap><%= uom.code %></td>
+                      <td nowrap><%= uom.name %></td>
+                      <td nowrap><%= uom.state ? "ACTIVE" : "NON ACTIVE" %></td>
+                      <td nowrap class="text-center">
+                        <a href="<%= edit_uom_path(uom) %>" class="btn btn-icon btn-sm btn-warning">
+                          <i class="far fa-edit"></i>
+                        </a>
+                        <a href="<%= uom_path(uom) %>" class="btn btn-icon btn-sm btn-danger" data-method="DELETE" data-confirm="Are you sure?">
+                          <i class="far fa-trash-alt"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h1>Uoms</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>State</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @uoms.each do |uom| %>
-      <tr>
-        <td><%= uom.code %></td>
-        <td><%= uom.name %></td>
-        <td><%= uom.state %></td>
-        <td><%= link_to 'Show', uom %></td>
-        <td><%= link_to 'Edit', edit_uom_path(uom) %></td>
-        <td><%= link_to 'Destroy', uom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Uom', new_uom_path %>
+<script>
+  $('#tableExport').DataTable({
+    order: [],
+    dom: 'Bfrtip',
+    buttons: [
+      'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
+</script>
