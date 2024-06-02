@@ -14,15 +14,15 @@
           <%= image_tag "219983.png", class: "user-img-radious-style", alt: "image" %>
           <span class="d-sm-none d-lg-inline-block"></span>
         </a>
-        <!-- <div class="dropdown-menu dropdown-menu-right pullDown">
-          <div class="dropdown-title">Hello <%#= current_user.name %></div>
-          <a class="dropdown-item has-icon"><i class="fas fa-cog"></i><%#= current_user.role.titleize %></a>
+        <div class="dropdown-menu dropdown-menu-right pullDown">
+          <div class="dropdown-title">Hello <%= current_user.name %></div>
+          <!-- <a class="dropdown-item has-icon"><i class="fas fa-cog"></i><%#= current_user.role.titleize %></a> -->
           <div class="dropdown-divider"></div>
-          <%#= link_to(destroy_user_session_path, title: 'Sign Out', method: 'DELETE', class: "dropdown-item has-icon text-danger") do %>
+          <%= link_to(destroy_user_session_path, title: 'Sign Out', method: 'DELETE', class: "dropdown-item has-icon text-danger") do %>
             <i class="fas fa-sign-out-alt"></i>
             Logout
-          <%# end %>
-        </div> -->
+          <% end %>
+        </div>
       </li>
     </ul>
   </nav>
