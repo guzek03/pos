@@ -65,7 +65,7 @@ class ItemsController < ApplicationController
     end
 
     def set_param
-      @uoms = Uom.all.order("name ASC")
+      @uoms = Uom.where(state: true).order("name ASC")
     end
 
     # Only allow a list of trusted parameters through.

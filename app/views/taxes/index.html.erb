@@ -1,31 +1,59 @@
-<p id="notice"><%= notice %></p>
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Tax</h4>
+            <div class="card-header-action">
+              <a href="<%= new_tax_path %>" class="btn btn-icon icon-left btn-primary">
+                <i class="fas fa-plus"></i> Tambah
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                <thead>
+                  <tr class="text-center">
+                    <th nowrap>PERCENTAGE</th>
+                    <th nowrap>YEAR</th>
+                    <th nowrap>STATE</th>
+                    <th nowrap>ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @taxes.each do |tax| %>
+                    <tr class="text-center">
+                      <td nowrap><%= tax.percentage %></td>
+                      <td nowrap><%= tax.year %></td>
+                      <td nowrap><%= tax.state ? "ACTIVE" : "NON ACTIVE" %></td>
+                      <td nowrap class="text-center">
+                        <a href="<%= edit_tax_path(tax) %>" class="btn btn-icon btn-sm btn-warning">
+                          <i class="far fa-edit"></i>
+                        </a>
+                        <a href="<%= tax_path(tax) %>" class="btn btn-icon btn-sm btn-danger" data-method="DELETE" data-confirm="Are you sure?">
+                          <i class="far fa-trash-alt"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h1>Taxes</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Percentage</th>
-      <th>Year</th>
-      <th>State</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @taxes.each do |tax| %>
-      <tr>
-        <td><%= tax.percentage %></td>
-        <td><%= tax.year %></td>
-        <td><%= tax.state %></td>
-        <td><%= link_to 'Show', tax %></td>
-        <td><%= link_to 'Edit', edit_tax_path(tax) %></td>
-        <td><%= link_to 'Destroy', tax, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Tax', new_tax_path %>
+<script>
+  $('#tableExport').DataTable({
+    order: [],
+    dom: 'Bfrtip',
+    buttons: [
+      'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
+</script>
