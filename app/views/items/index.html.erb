@@ -1,33 +1,60 @@
-<p id="notice"><%= notice %></p>
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Item</h4>
+            <div class="card-header-action">
+              <a href="<%= new_item_path %>" class="btn btn-icon icon-left btn-primary">
+                <i class="fas fa-plus"></i> Tambah
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                <thead>
+                  <tr class="text-center">
+                    <th nowrap>SKU</th>
+                    <th nowrap>NAME</th>
+                    <th nowrap>UoM</th>
+                    <th nowrap>STATUS</th>
+                    <th nowrap>AKSI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @items.each do |item| %>
+                    <tr class="text-center">
+                      <td nowrap><%= item.code %></td>
+                      <td nowrap><%= item.name %></td>
+                      <td nowrap><%= item.state ? "ACTIVE" : "NON ACTIVE" %></td>
+                      <td nowrap class="text-center">
+                        <a href="<%= edit_item_path(item) %>" class="btn btn-icon btn-sm btn-warning">
+                          <i class="far fa-edit"></i>
+                        </a>
+                        <a href="<%= item_path(item) %>" class="btn btn-icon btn-sm btn-danger" data-method="DELETE" data-confirm="Are you sure?">
+                          <i class="far fa-trash-alt"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h1>Items</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Sku</th>
-      <th>Name</th>
-      <th>State</th>
-      <th>Uom</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.sku %></td>
-        <td><%= item.name %></td>
-        <td><%= item.state %></td>
-        <td><%= item.uom %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Item', new_item_path %>
+<script>
+  $('#tableExport').DataTable({
+    order: [],
+    dom: 'Bfrtip',
+    buttons: [
+      'copy', 'csv', 'excel', 'pdf', 'print'
+    ]
+  });
+</script>
