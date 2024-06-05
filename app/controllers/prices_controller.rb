@@ -1,9 +1,10 @@
 class PricesController < ApplicationController
   before_action :set_price, only: %i[ show edit update destroy ]
+  before_action :set_param, only: %i[ new edit create update ]
 
   # GET /prices or /prices.json
   def index
-    @prices = Price.all
+    @prices = Price.includes(:item)
   end
 
   # GET /prices/1 or /prices/1.json
@@ -25,7 +26,7 @@ class PricesController < ApplicationController
 
     respond_to do |format|
       if @price.save
-        format.html { redirect_to price_url(@price), notice: "Price was successfully created." }
+        format.html { redirect_to prices_url, notice: "Price was successfully created." }
         format.json { render :show, status: :created, location: @price }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class PricesController < ApplicationController
   def update
     respond_to do |format|
       if @price.update(price_params)
-        format.html { redirect_to price_url(@price), notice: "Price was successfully updated." }
+        format.html { redirect_to prices_url, notice: "Price was successfully updated." }
         format.json { render :show, status: :ok, location: @price }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,8 +64,12 @@ class PricesController < ApplicationController
       @price = Price.find(params[:id])
     end
 
+    def set_param
+      @items = Item.all
+    end
+
     # Only allow a list of trusted parameters through.
     def price_params
-      params.require(:price).permit(:item_id, :price)
+      params.require(:price).permit(:item_id, :price, :start_date, :end_date)
     end
 end

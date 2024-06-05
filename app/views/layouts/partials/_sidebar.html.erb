@@ -10,7 +10,10 @@
         <a href="<%= root_path %>" class="nav-link"><i class="fab fa-dashcube"></i><span>Dashboard</span></a>
       </li>
       <li class="dropdown 
-        <%= params[:controller] == 'items' || params[:controller] == 'uoms' || params[:controller] == 'payments' || params[:controller] == 'taxes' ? 'active' : '' %>
+        <%= 
+          params[:controller] == 'items' || params[:controller] == 'uoms' || params[:controller] == 'payments' || params[:controller] == 'taxes' ||
+          params[:controller] == 'prices' ? 
+          'active' : '' %>
         ">
         <a href="#" class="menu-toggle nav-link has-dropdown"><i class="far fa-sun"></i><span>Master Data</span></a>
         <ul class="dropdown-menu">
@@ -32,6 +35,11 @@
           <li class="<%= params[:controller] == 'taxes' ? 'active' : '' %>">
             <a href="<%= taxes_path %>" class="nav-link <%= params[:controller] == 'taxes' ? 'toggled' : '' %>">
               <span>Tax</span>
+            </a>
+          </li>
+          <li class="<%= params[:controller] == 'prices' ? 'active' : '' %>">
+            <a href="<%= prices_path %>" class="nav-link <%= params[:controller] == 'prices' ? 'toggled' : '' %>">
+              <span>Price</span>
             </a>
           </li>
         </ul>

@@ -1,27 +1,43 @@
-<%= form_with(model: price, local: true) do |form| %>
-  <% if price.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(price.errors.count, "error") %> prohibited this price from being saved:</h2>
+<%= form_for @price, html: { class: "needs-validation", novalidate: "" } do |f| %>
+  <div class="card-header">
+    <h4>Price Form</h4>
+  </div>
+  <div class="card-body">
+    <% if @price.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@price.errors.count, "error") %> prohibited this price from being saved:</h2>
 
-      <ul>
-      <% price.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @price.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Item <span class="text-danger">*</span></label>
+      <div class="col-sm-9">
+        <%= f.collection_select :item_id, @items, :id, :sku_name, {prompt: "-- pilih --"}, class: 'form-control select2', required: "" %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :item_id %>
-    <%= form.text_field :item_id %>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Unit Price <span class="text-danger">*</span></label>
+      <div class="col-sm-9">
+        <%= f.text_field :price, class: 'form-control rupiah', required: "" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Periode <span class="text-danger">*</span></label>
+      <div class="col-sm-3">
+        <%= f.date_field :start_date, class: 'form-control', required: "" %>
+      </div>
+      <div class="col-sm-3">
+        <%= f.date_field :end_date, class: 'form-control', required: "" %>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="card-footer text-right">
+    <%= link_to "Back", prices_path, class: "btn btn-secondary" %>
+    <button class="btn btn-primary submitForm" type="submit">Submit</button>
   </div>
 <% end %>

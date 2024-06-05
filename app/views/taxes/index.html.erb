@@ -25,7 +25,7 @@
                 <tbody>
                   <% @taxes.each do |tax| %>
                     <tr class="text-center">
-                      <td nowrap><%= tax.percentage %></td>
+                      <td nowrap><%= number_to_percentage(tax.percentage, precision: 2, separator: ".", delimiter: ",") %></td>
                       <td nowrap><%= tax.year %></td>
                       <td nowrap><%= tax.state ? "ACTIVE" : "NON ACTIVE" %></td>
                       <td nowrap class="text-center">

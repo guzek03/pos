@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_02_062012) do
+ActiveRecord::Schema.define(version: 2024_06_05_061448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 2024_06_02_062012) do
     t.decimal "price", precision: 15, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_date"
+    t.date "end_date"
     t.index ["item_id"], name: "index_prices_on_item_id"
   end
 

@@ -1,29 +1,63 @@
-<p id="notice"><%= notice %></p>
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Price</h4>
+            <div class="card-header-action">
+              <a href="<%= new_price_path %>" class="btn btn-icon icon-left btn-primary">
+                <i class="fas fa-plus"></i> Tambah
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                <thead>
+                  <tr class="text-center">
+                    <th nowrap>SKU</th>
+                    <th nowrap>NAME</th>
+                    <th nowrap>PRICE</th>
+                    <th nowrap>START PERIOD</th>
+                    <th nowrap>END PERIOD</th>
+                    <th nowrap>ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @prices.each do |price| %>
+                    <tr>
+                      <td align="center"><%= price.item.try(:sku) %></td>
+                      <td align="center"><%= price.item.try(:name) %></td>
+                      <td align="right"><%= number_to_currency(price.price, unit: "", precision: 2, separator: ".", delimiter: ",") %></td>
+                      <td align="center"><%= price.start_date %></td>
+                      <td align="center"><%= price.end_date %></td>
+                      <td nowrap class="text-center">
+                        <a href="<%= edit_price_path(price) %>" class="btn btn-icon btn-sm btn-warning">
+                          <i class="far fa-edit"></i>
+                        </a>
+                        <a href="<%= price_path(price) %>" class="btn btn-icon btn-sm btn-danger" data-method="DELETE" data-confirm="Are you sure?">
+                          <i class="far fa-trash-alt"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h1>Prices</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @prices.each do |price| %>
-      <tr>
-        <td><%= price.item %></td>
-        <td><%= price.price %></td>
-        <td><%= link_to 'Show', price %></td>
-        <td><%= link_to 'Edit', edit_price_path(price) %></td>
-        <td><%= link_to 'Destroy', price, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Price', new_price_path %>
+<script>
+  $('#tableExport').DataTable({
+    order: [],
+    // dom: 'Bfrtip',
+    // buttons: [
+    //   'copy', 'csv', 'excel', 'pdf', 'print'
+    // ]
+  });
+</script>
