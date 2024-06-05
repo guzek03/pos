@@ -49,6 +49,20 @@
           </li>
         </ul>
       </li>
+      <li class="dropdown 
+        <%= 
+          params[:controller] == 'receptions' ? 
+          'active' : '' %>
+        ">
+        <a href="#" class="menu-toggle nav-link has-dropdown"><i class="fas fa-shopping-basket"></i><span>Transaction</span></a>
+        <ul class="dropdown-menu">
+          <li class="<%= params[:controller] == 'receptions' ? 'active' : '' %>">
+            <a href="<%= receptions_path %>" class="nav-link <%= params[:controller] == 'receptions' ? 'toggled' : '' %>">
+              <span>Reception</span>
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </aside>
 </div>

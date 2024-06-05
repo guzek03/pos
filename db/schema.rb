@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_05_064302) do
+ActiveRecord::Schema.define(version: 2024_06_05_070008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 2024_06_05_064302) do
     t.date "end_date"
     t.boolean "state", default: true
     t.index ["item_id"], name: "index_prices_on_item_id"
+  end
+
+  create_table "receptions", force: :cascade do |t|
+    t.string "number"
+    t.bigint "item_id"
+    t.integer "qty"
+    t.text "notes"
+    t.boolean "is_confirm"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_receptions_on_item_id"
   end
 
   create_table "stocks", force: :cascade do |t|
@@ -97,5 +108,6 @@ ActiveRecord::Schema.define(version: 2024_06_05_064302) do
 
   add_foreign_key "items", "uoms"
   add_foreign_key "prices", "items"
+  add_foreign_key "receptions", "items"
   add_foreign_key "stocks", "items"
 end

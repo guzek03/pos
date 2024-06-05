@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @reception.number %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @reception.item %>
+</p>
+
+<p>
+  <strong>Qty:</strong>
+  <%= @reception.qty %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @reception.notes %>
+</p>
+
+<p>
+  <strong>Is confirm:</strong>
+  <%= @reception.is_confirm %>
+</p>
+
+<%= link_to 'Edit', edit_reception_path(@reception) %> |
+<%= link_to 'Back', receptions_path %>

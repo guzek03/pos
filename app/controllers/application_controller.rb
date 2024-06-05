@@ -21,4 +21,39 @@ class ApplicationController < ActionController::Base
 
     result
   end
+
+  def generateReceptionNumber(kode)
+    month = Date.today.strftime("%m")
+    year = Date.today.strftime("%Y")
+    code = kode.to_s + "/" + to_roman(month.to_i).to_s + "/" + year.to_s
+    sequence = getCodeSequence(code, Time.current.year)
+    return code + "/" + sequence.to_s.rjust(3, "0")
+  end
+
+  def to_roman(num)
+    return '' if num <= 0 || num >= 4000
+
+    roman_mapping = {
+      1000 => 'M',
+      900 => 'CM',
+      500 => 'D',
+      400 => 'CD',
+      100 => 'C',
+      90 => 'XC',
+      50 => 'L',
+      40 => 'XL',
+      10 => 'X',
+      9 => 'IX',
+      5 => 'V',
+      4 => 'IV',
+      1 => 'I'
+    }
+
+    result = ''
+    roman_mapping.each do |value, letter|
+      result << letter * (num / value)
+      num = num % value
+    end
+    result
+  end
 end

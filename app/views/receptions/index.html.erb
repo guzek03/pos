@@ -1,0 +1,71 @@
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Reception</h4>
+            <div class="card-header-action">
+              <a href="<%= new_reception_path %>" class="btn btn-icon icon-left btn-primary">
+                <i class="fas fa-plus"></i> Tambah
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                <thead>
+                  <tr class="text-center">
+                    <th nowrap>NUMBER</th>
+                    <th nowrap>SKU</th>
+                    <th nowrap>QTY</th>
+                    <th nowrap>NOTES</th>
+                    <th nowrap>STATE</th>
+                    <th nowrap>ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @receptions.each do |reception| %>
+                    <tr>
+                      <td align="center"><%= reception.number %></td>
+                      <td><%= reception.item.try(:sku) %> - <%= reception.item.try(:name) %></td>
+                      <td align="center"><%= reception.qty %></td>
+                      <td><%= reception.notes %></td>
+                      <td align="center"><%= reception.is_confirm.nil? ? "NEW" : (reception.is_confirm) ? "CONFIRM" : "REJECT" %></td>
+                      <td nowrap class="text-center">
+                        <% if reception.is_confirm.nil? %>
+                          <a href="<%= edit_reception_path(reception) %>" class="btn btn-icon btn-sm btn-warning">
+                            <i class="far fa-edit"></i>
+                          </a>
+                          <a href="<%= reception_path(reception) %>" class="btn btn-icon btn-sm btn-danger" data-method="DELETE" data-confirm="Are you sure?">
+                            <i class="far fa-trash-alt"></i>
+                          </a>
+                          <a href="<%= confirm_reception_path(reception) %>" class="btn btn-icon btn-sm btn-info" data-method="PATCH" data-confirm="Are you sure?" title="CONFIRM">
+                            <i class="fas fa-check"></i>
+                          </a>
+                          <a href="<%= reject_reception_path(reception) %>" class="btn btn-icon btn-sm btn-danger" data-method="PATCH" data-confirm="Are you sure?" title="REJECT">
+                            <i class="fas fa-window-close"></i>
+                          </a>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $('#tableExport').DataTable({
+    order: [],
+    // dom: 'Bfrtip',
+    // buttons: [
+    //   'copy', 'csv', 'excel', 'pdf', 'print'
+    // ]
+  });
+</script>
