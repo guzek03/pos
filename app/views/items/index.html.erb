@@ -26,8 +26,9 @@
                 <tbody>
                   <% @items.each do |item| %>
                     <tr class="text-center">
-                      <td nowrap><%= item.code %></td>
+                      <td nowrap><%= item.sku %></td>
                       <td nowrap><%= item.name %></td>
+                      <td nowrap><%= item.uom.try(:name) %></td>
                       <td nowrap><%= item.state ? "ACTIVE" : "NON ACTIVE" %></td>
                       <td nowrap class="text-center">
                         <a href="<%= edit_item_path(item) %>" class="btn btn-icon btn-sm btn-warning">

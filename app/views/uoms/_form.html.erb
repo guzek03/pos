@@ -3,6 +3,17 @@
     <h4>UoM Form</h4>
   </div>
   <div class="card-body">
+    <% if @uom.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@uom.errors.count, "error") %> prohibited this uom from being saved:</h2>
+
+        <ul>
+        <% @uom.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div class="form-group row">
       <label class="col-sm-3 col-form-label">Code <span class="text-danger">*</span></label>
       <div class="col-sm-9">
