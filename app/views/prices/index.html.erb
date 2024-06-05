@@ -21,6 +21,7 @@
                     <th nowrap>PRICE</th>
                     <th nowrap>START PERIOD</th>
                     <th nowrap>END PERIOD</th>
+                    <th nowrap>STATE</th>
                     <th nowrap>ACTION</th>
                   </tr>
                 </thead>
@@ -32,6 +33,7 @@
                       <td align="right"><%= number_to_currency(price.price, unit: "", precision: 2, separator: ".", delimiter: ",") %></td>
                       <td align="center"><%= price.start_date %></td>
                       <td align="center"><%= price.end_date %></td>
+                      <td align="center"><%= tax.state ? "ACTIVE" : "NON ACTIVE" %></td>
                       <td nowrap class="text-center">
                         <a href="<%= edit_price_path(price) %>" class="btn btn-icon btn-sm btn-warning">
                           <i class="far fa-edit"></i>
