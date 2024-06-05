@@ -70,6 +70,6 @@ class PricesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def price_params
-      params.require(:price).permit(:item_id, :price, :start_date, :end_date)
+      params.require(:price).permit(:item_id, :price, :start_date, :end_date, :state)
     end
 end
