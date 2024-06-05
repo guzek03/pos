@@ -65,7 +65,7 @@ class PricesController < ApplicationController
     end
 
     def set_param
-      @items = Item.all
+      @items = Item.all.order("SKU ASC")
     end
 
     # Only allow a list of trusted parameters through.

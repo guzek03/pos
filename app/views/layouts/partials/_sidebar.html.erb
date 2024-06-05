@@ -12,7 +12,7 @@
       <li class="dropdown 
         <%= 
           params[:controller] == 'items' || params[:controller] == 'uoms' || params[:controller] == 'payments' || params[:controller] == 'taxes' ||
-          params[:controller] == 'prices' ? 
+          params[:controller] == 'prices' || params[:controller] == 'stocks' ? 
           'active' : '' %>
         ">
         <a href="#" class="menu-toggle nav-link has-dropdown"><i class="far fa-sun"></i><span>Master Data</span></a>
@@ -40,6 +40,11 @@
           <li class="<%= params[:controller] == 'prices' ? 'active' : '' %>">
             <a href="<%= prices_path %>" class="nav-link <%= params[:controller] == 'prices' ? 'toggled' : '' %>">
               <span>Price</span>
+            </a>
+          </li>
+          <li class="<%= params[:controller] == 'stocks' ? 'active' : '' %>">
+            <a href="<%= stocks_path %>" class="nav-link <%= params[:controller] == 'stocks' ? 'toggled' : '' %>">
+              <span>Stock</span>
             </a>
           </li>
         </ul>

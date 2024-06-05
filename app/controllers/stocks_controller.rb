@@ -1,5 +1,6 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
+  before_action :set_param, only: %i[ new edit create update ]
 
   # GET /stocks or /stocks.json
   def index
@@ -63,8 +64,12 @@ class StocksController < ApplicationController
       @stock = Stock.find(params[:id])
     end
 
+    def set_param
+      @items = Item.all.order("SKU ASC")
+    end
+
     # Only allow a list of trusted parameters through.
     def stock_params
-      params.require(:stock).permit(:item_id, :initial_qty, :current_quantity)
+      params.require(:stock).permit(:item_id, :current_qty)
     end
 end

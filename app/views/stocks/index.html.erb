@@ -1,31 +1,57 @@
-<p id="notice"><%= notice %></p>
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Stock</h4>
+            <div class="card-header-action">
+              <a href="<%= new_stock_path %>" class="btn btn-icon icon-left btn-primary">
+                <i class="fas fa-plus"></i> Tambah
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                <thead>
+                  <tr class="text-center">
+                    <th nowrap>SKU</th>
+                    <th nowrap>CURRENT STOCK</th>
+                    <!-- <th nowrap>ACTION</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @stocks.each do |stock| %>
+                    <tr>
+                      <td align="center"><%= stock.item.try(:sku) %> - <%= stock.item.try(:name) %></td>
+                      <td align="center"><%= stock.current_qty %></td>
+                      <!-- <td nowrap class="text-center">
+                        <a href="<%#= edit_stock_path(stock) %>" class="btn btn-icon btn-sm btn-warning">
+                          <i class="far fa-edit"></i>
+                        </a>
+                        <a href="<%#= stock_path(stock) %>" class="btn btn-icon btn-sm btn-danger" data-method="DELETE" data-confirm="Are you sure?">
+                          <i class="far fa-trash-alt"></i>
+                        </a>
+                      </td> -->
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h1>Stocks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Initial qty</th>
-      <th>Current quantity</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @stocks.each do |stock| %>
-      <tr>
-        <td><%= stock.item %></td>
-        <td><%= stock.initial_qty %></td>
-        <td><%= stock.current_quantity %></td>
-        <td><%= link_to 'Show', stock %></td>
-        <td><%= link_to 'Edit', edit_stock_path(stock) %></td>
-        <td><%= link_to 'Destroy', stock, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Stock', new_stock_path %>
+<script>
+  $('#tableExport').DataTable({
+    order: [],
+    // dom: 'Bfrtip',
+    // buttons: [
+    //   'copy', 'csv', 'excel', 'pdf', 'print'
+    // ]
+  });
+</script>

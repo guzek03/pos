@@ -17,7 +17,6 @@
                 <thead>
                   <tr class="text-center">
                     <th nowrap>SKU</th>
-                    <th nowrap>NAME</th>
                     <th nowrap>PRICE</th>
                     <th nowrap>START PERIOD</th>
                     <th nowrap>END PERIOD</th>
@@ -28,8 +27,7 @@
                 <tbody>
                   <% @prices.each do |price| %>
                     <tr>
-                      <td align="center"><%= price.item.try(:sku) %></td>
-                      <td align="center"><%= price.item.try(:name) %></td>
+                      <td align="center"><%= price.item.try(:sku) %> - <%= price.item.try(:name) %></td>
                       <td align="right"><%= number_to_currency(price.price, unit: "", precision: 2, separator: ".", delimiter: ",") %></td>
                       <td align="center"><%= price.start_date %></td>
                       <td align="center"><%= price.end_date %></td>

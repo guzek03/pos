@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_05_062728) do
+ActiveRecord::Schema.define(version: 2024_06_05_064302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,8 +54,7 @@ ActiveRecord::Schema.define(version: 2024_06_05_062728) do
 
   create_table "stocks", force: :cascade do |t|
     t.bigint "item_id"
-    t.integer "initial_qty"
-    t.integer "current_quantity"
+    t.integer "current_qty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_stocks_on_item_id"
