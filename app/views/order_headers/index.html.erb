@@ -20,7 +20,7 @@
                     <th nowrap>INVOICE NUMBER</th>
                     <th nowrap>INVOICE DATE</th>
                     <th nowrap>CUSTOMER NAME</th>
-                    <th nowrap>TOTAL PRICE</th>
+                    <th nowrap>TOTAL PRICE (Exc. PPN)</th>
                     <th nowrap>STATE</th>
                     <th nowrap>ACTION</th>
                   </tr>
@@ -28,21 +28,35 @@
                 <tbody>
                   <% @order_headers.each do |order_header| %>
                     <tr>
-                      <td align="center"><%= order_header.invoice_date %></td>
-                      <td><%= order_header.number %></td>
+                      <td align="center"><%= order_header.number %></td>
                       <td><%= order_header.invoice_number %></td>
+                      <td><%= order_header.invoice_date %></td>
                       <td><%= order_header.customer_name %></td>
-                      <td></td>
-                      <td align="center"><%= order_header.state %></td>
+                      <td align="right"><%= number_to_currency(order_header.total_price_exclude, unit: "", precision: 2, delimiter: ",", separator: ".") %></td>
+                      <td align="center"><%= (order_header.state == 3) ? "CONFIRM" : (order_header.state == 2) ? "ON CONFIRM" : (order_header.state == 1) ? "ON CHECK" : "NEW REQUEST" %></td>
                       <td nowrap class="text-center">
-                        <%# if order_header.is_confirm.nil? %>
+                        <a href="<%= order_header_path(order_header) %>" class="btn btn-icon btn-sm btn-default">
+                          <i class="far fa-eye"></i>
+                        </a>
+                        <% if order_header.state == 0 %>
                           <a href="<%= edit_order_header_path(order_header) %>" class="btn btn-icon btn-sm btn-warning">
                             <i class="far fa-edit"></i>
                           </a>
                           <a href="<%= order_header_path(order_header) %>" class="btn btn-icon btn-sm btn-danger" data-method="DELETE" data-confirm="Are you sure?">
                             <i class="far fa-trash-alt"></i>
                           </a>
-                        <%# end %>
+                          <a href="<%= on_process_order_header_path(order_header) %>" class="btn btn-icon btn-sm btn-info" data-method="PATCH" data-confirm="Are you sure?" title="ON PROCESS">
+                            <i class="fas fa-check"></i>
+                          </a>
+                        <% elsif order_header.state == 1 %>
+                          <a href="<%= on_check_order_header_path(order_header) %>" class="btn btn-icon btn-sm btn-info">
+                            <i class="fas fa-check"></i>
+                          </a>
+                        <% elsif order_header.state == 2 %>
+                          <a href="<%= on_confirm_order_header_path(order_header) %>" class="btn btn-icon btn-sm btn-info">
+                            <i class="fas fa-check"></i>
+                          </a>
+                        <% end %>
                       </td>
                     </tr>
                   <% end %>

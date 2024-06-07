@@ -30,6 +30,22 @@ class ApplicationController < ActionController::Base
     return code + "/" + sequence.to_s.rjust(3, "0")
   end
 
+  def generateOrderNumber(kode)
+    month = Date.today.strftime("%m")
+    year = Date.today.strftime("%Y")
+    code = kode.to_s + "/" + to_roman(month.to_i).to_s + "/" + year.to_s
+    sequence = getCodeSequence(code, Time.current.year)
+    return code + "/" + sequence.to_s.rjust(3, "0")
+  end
+
+  def generateInvoiceNumber(kode)
+    month = Date.today.strftime("%m")
+    year = Date.today.strftime("%Y")
+    code = kode.to_s + "/" + to_roman(month.to_i).to_s + "/" + year.to_s
+    sequence = getCodeSequence(code, Time.current.year)
+    return code + "/" + sequence.to_s.rjust(3, "0")
+  end
+
   def to_roman(num)
     return '' if num <= 0 || num >= 4000
 

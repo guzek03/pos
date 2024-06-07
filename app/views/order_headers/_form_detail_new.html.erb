@@ -9,23 +9,29 @@
           <table class="table">
             <thead>
               <tr>
-                <th width="80%">Item</th>
-                <th width="18%">Qty</th>
+                <th width="70%">Item</th>
+                <th width="10%">Qty</th>
+                <th width="18%">Unit Price (Exc. PPN)</th>
                 <th width="2%"></th>
               </tr>
             </thead>
             <tbody class="order_details_tbody">
               <tr>
                 <td>
-                  <select name="order_header[orders_details_attributes][][item_id]" class="form-control" required>
-                    <option value="">-- pilih --</option>
+                  <select name="order_header[order_details_attributes][][item_id]" class="form-control select2 select_item" required>
+                    <option value="">-- select --</option>
                     <% @items.each do |item| %>
                       <option value="<%= item.id %>"><%= item.sku %> - <%= item.name %></option>
                     <% end %>
                   </select>
                 </td>
                 <td class="qty_request_group">
-                  <input type="number" name="order_header[orders_details_attributes][][qty_request]" class="form-control qty_request" required>
+                  <input type="number" name="order_header[order_details_attributes][][qty_request]" class="form-control qty_request" required>
+                </td>
+                <td class="price_exclude_group">
+                  <input type="text" name="order_header[order_details_attributes][][price_exclude]" class="form-control rupiah price_exclude" readonly required>
+                  <input type="hidden" name="order_header[order_details_attributes][][price_include]" class="form-control rupiah price_include" readonly required>
+                  <input type="hidden" name="order_header[order_details_attributes][][percentage_ppn]" class="form-control rupiah percentage_ppn" readonly required>
                 </td>
                 <td>
                   <button type="button" class="btn btn-sm btn-info add_order_details">+</button>
@@ -38,3 +44,7 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(".select2").select2();
+</script>

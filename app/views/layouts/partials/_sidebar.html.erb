@@ -51,7 +51,7 @@
       </li>
       <li class="dropdown 
         <%= 
-          params[:controller] == 'receptions' ? 
+          params[:controller] == 'receptions' || params[:controller] == 'order_headers' ? 
           'active' : '' %>
         ">
         <a href="#" class="menu-toggle nav-link has-dropdown"><i class="fas fa-shopping-basket"></i><span>Transaction</span></a>

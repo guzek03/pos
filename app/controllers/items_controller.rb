@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  include ItemsHelper
   before_action :set_item, only: %i[ show edit update destroy ]
   before_action :set_param, only: %i[ new edit create update ]
 
@@ -56,6 +57,11 @@ class ItemsController < ApplicationController
       format.html { redirect_to items_url, notice: "Item was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def get_items_active
+    @items = Item.where(state: true).order("SKU ASC")
+    render plain: helpers.items_html()
   end
 
   private

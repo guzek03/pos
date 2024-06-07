@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2024_06_07_035520) do
   create_table "items", force: :cascade do |t|
     t.string "sku"
     t.string "name"
-    t.boolean "state"
+    t.boolean "state", default: true
     t.bigint "uom_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

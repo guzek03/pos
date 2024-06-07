@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Detail</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="70%">Item</th>
+                <th width="10%">Qty</th>
+                <th width="18%">Unit Price (Exc. PPN)</th>
+                <th width="2%"></th>
+              </tr>
+            </thead>
+            <tbody class="order_details_tbody">
+              <% is_first_detail = true %>
+              <% @order_header.order_details.each do |order_detail| %>
+                <tr>
+                  <td>
+                    <select name="order_header[order_details_attributes][][item_id]" class="form-control select2 select_item" required>
+                      <option value="">-- select --</option>
+                      <% @items.each do |item| %>
+                        <option value="<%= item.id %>" <%= order_detail.item_id == item.id ? "selected='selected'" : "" %>><%= item.sku %> - <%= item.name %></option>
+                      <% end %>
+                    </select>
+                  </td>
+                  <td class="qty_request_group">
+                    <input type="number" name="order_header[order_details_attributes][][qty_request]" class="form-control qty_request" value="<%= order_detail.qty_request %>" required>
+                  </td>
+                  <td class="price_exclude_group">
+                    <input type="text" name="order_header[order_details_attributes][][price_exclude]" class="form-control rupiah price_exclude" value="<%= order_detail.price_exclude %>" readonly required>
+                    <input type="hidden" name="order_header[order_details_attributes][][price_include]" class="form-control rupiah price_include" value="<%= order_detail.price_include %>" readonly required>
+                    <input type="hidden" name="order_header[order_details_attributes][][percentage_ppn]" class="form-control rupiah percentage_ppn" value="<%= order_detail.percentage_ppn %>" readonly required>
+                  </td>
+                  <td>
+                    <% if !is_first_detail %>
+                      <button type="button" class="btn btn-sm btn-danger remove_order_details_edit">-</button>
+                      <input type="hidden" name="order_header[order_details_attributes][][_destroy]" class="form-control order_detail_destroy">
+                    <% else %>
+                      <button type="button" class="btn btn-sm btn-info add_order_details">+</button>
+                    <% end %>
+                    <input type="hidden" name="order_header[order_details_attributes][][id]" value="<%= order_detail.id %>" class="form-control" required>
+                    <input type="hidden" name="order_header[order_details_attributes][][order_header_id]" value="<%= order_detail.order_header_id %>" class="form-control" required>
+                  </td>
+                </tr>
+                <% is_first_detail = false %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(".select2").select2();
+</script>

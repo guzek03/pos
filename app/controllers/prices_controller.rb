@@ -58,6 +58,14 @@ class PricesController < ApplicationController
     end
   end
 
+  def get_price
+    @item = Item.find_by(id: params[:id])
+    @price = Price.where(item_id: @item.id, state: true).where("'#{Date.today}' >= start_date AND '#{Date.today}' <= end_date").order("start_date DESC").first
+    @tax = Tax.find_by(year: Date.today.year.to_i, state: true)
+    render json: {price: @price.price.to_f, percentage_ppn: @tax.percentage.to_f, price_include: @price.price.to_f + (@price.price.to_f * @tax.percentage.to_f / 100)}
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_price

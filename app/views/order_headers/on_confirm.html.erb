@@ -54,6 +54,12 @@
             </div>
           </div>
         </div>
+        <div class="text-right">
+          <%= link_to "Back", order_headers_path, class: "btn btn-secondary" %>
+          <a href="<%= submit_confirm_order_header_path(@order_header) %>" class="btn btn-icon btn-info" data-method="PATCH" data-confirm="Are you sure?" title="CONFIRM">
+            Confirm
+          </a>
+        </div>
       </div>
     </div>
   </div>

@@ -1,14 +1,14 @@
 <section class="section">
   <div class="section-body">
-    <%= form_for @order_header, html: { class: "needs-validation", novalidate: "" } do |f| %>
+    <%= form_for @order_header, url: submit_on_check_order_header_path, method: "POST", html: { class: "needs-validation", novalidate: "" } do |f| %>
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <%= render 'form', f: f %>
+            <%= render 'form_oncheck', f: f %>
           </div>
         </div>
       </div>
-      <%= render 'form_detail_edit' %>
+      <%= render 'form_oncheck_detail_edit' %>
       <div class="text-right">
         <%= link_to "Back", order_headers_path, class: "btn btn-secondary" %>
         <button class="btn btn-primary submitForm" type="submit">Submit</button>

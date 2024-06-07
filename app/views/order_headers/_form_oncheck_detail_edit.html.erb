@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Detail</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="60%">Item</th>
+                <th width="10%">Qty Request</th>
+                <th width="10%">Qty Available</th>
+                <th width="20%">Unit Price (Exc. PPN)</th>
+              </tr>
+            </thead>
+            <tbody class="order_details_tbody">
+              <% @order_details.each do |order_detail| %>
+              <tr>
+                <td>
+                  <%= order_detail.item.try(:sku) %> - <%= order_detail.item.try(:name) %>
+                </td>
+                <td>
+                  <%= order_detail.qty_request %>
+                </td>
+                <td class="qty_available_group">
+                  <input type="hidden" name="order_details[][id]" class="form-control" value="<%= order_detail.id %>" readonly required>
+                  <input type="number" name="order_details[][qty_available]" class="form-control qty_available" required>
+                </td>
+                <td align="right" class="price_exclude_group">
+                  <%= number_to_currency(order_detail.price_exclude, unit: "", precision: 2, delimiter: ",", separator: ".") %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(".select2").select2();
+</script>
