@@ -1,0 +1,47 @@
+<div class="card-header">
+  <h4>Order Form</h4>
+</div>
+<div class="card-body">
+  <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Customer Name <span class="text-danger">*</span></label>
+    <div class="col-sm-9">
+      <%= f.text_field :customer_name, class: 'form-control', required: "" %>
+    </div>
+  </div>
+</div>
+<br/>
+
+<script>
+  function rupiah() {
+    $('.rupiah').each(function(i, o) {
+      $(o).val(formatCurrency($(o).val()));
+    });
+    $('.rupiah').on('focus', function(){
+      if (parseFloat(formatCurrencyCleaner($(this).val())) == 0) {
+        $(this).val('0.0');
+      }
+    });
+    $('.rupiah').on('blur', function(){
+      if ($(this).val() == '') {
+        $(this).val('0.0');
+      }
+    });
+    $('.rupiah').keyup(function(e){
+      if ( /^-?\d+\.\d{1,2}/g.test(this.value) || /^-?\d+/g.test(this.value) || /^-$/g.test(this.value) ) {
+        if (/^-?\d+\.\d{1,2}/g.test(this.value)) {
+          $(this).val(formatCurrency($(this).val()));
+        } else if (/^-?\d+/g.test(this.value)) {
+          $(this).val(formatCurrency($(this).val()));
+        } else if (/^-$/g.test(this.value)) {
+          $(this).val(formatCurrency($(this).val()));
+        } else if (/^-?\D*\d+\D*/g.test(this.value)) {
+          this.value = this.value.replace(this.value, '');
+        } else {
+          $(this).val(formatCurrency($(this).val()));
+        }
+      } else {
+        this.value = this.value.replace(this.value, '');
+      }
+    });
+  }
+</script>

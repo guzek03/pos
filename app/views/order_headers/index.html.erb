@@ -1,0 +1,67 @@
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Order</h4>
+            <div class="card-header-action">
+              <a href="<%= new_order_header_path %>" class="btn btn-icon icon-left btn-primary">
+                <i class="fas fa-plus"></i> Tambah
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                <thead>
+                  <tr class="text-center">
+                    <th nowrap>NUMBER</th>
+                    <th nowrap>INVOICE NUMBER</th>
+                    <th nowrap>INVOICE DATE</th>
+                    <th nowrap>CUSTOMER NAME</th>
+                    <th nowrap>TOTAL PRICE</th>
+                    <th nowrap>STATE</th>
+                    <th nowrap>ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @order_headers.each do |order_header| %>
+                    <tr>
+                      <td align="center"><%= order_header.invoice_date %></td>
+                      <td><%= order_header.number %></td>
+                      <td><%= order_header.invoice_number %></td>
+                      <td><%= order_header.customer_name %></td>
+                      <td></td>
+                      <td align="center"><%= order_header.state %></td>
+                      <td nowrap class="text-center">
+                        <%# if order_header.is_confirm.nil? %>
+                          <a href="<%= edit_order_header_path(order_header) %>" class="btn btn-icon btn-sm btn-warning">
+                            <i class="far fa-edit"></i>
+                          </a>
+                          <a href="<%= order_header_path(order_header) %>" class="btn btn-icon btn-sm btn-danger" data-method="DELETE" data-confirm="Are you sure?">
+                            <i class="far fa-trash-alt"></i>
+                          </a>
+                        <%# end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  $('#tableExport').DataTable({
+    order: [],
+    // dom: 'Bfrtip',
+    // buttons: [
+    //   'copy', 'csv', 'excel', 'pdf', 'print'
+    // ]
+  });
+</script>

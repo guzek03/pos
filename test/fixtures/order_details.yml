@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_header: one
+  item: one
+  qty_request: 1
+  qty_available: 1
+  price_include: 9.99
+  price_exclude: 9.99
+  percentage_ppn: 9.99
+  is_confirm: false
+
+two:
+  order_header: two
+  item: two
+  qty_request: 1
+  qty_available: 1
+  price_include: 9.99
+  price_exclude: 9.99
+  percentage_ppn: 9.99
+  is_confirm: false

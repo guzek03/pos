@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Detail</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="80%">Item</th>
+                <th width="18%">Qty</th>
+                <th width="2%"></th>
+              </tr>
+            </thead>
+            <tbody class="order_details_tbody">
+              <tr>
+                <td>
+                  <select name="order_header[orders_details_attributes][][item_id]" class="form-control" required>
+                    <option value="">-- pilih --</option>
+                    <% @items.each do |item| %>
+                      <option value="<%= item.id %>"><%= item.sku %> - <%= item.name %></option>
+                    <% end %>
+                  </select>
+                </td>
+                <td class="qty_request_group">
+                  <input type="number" name="order_header[orders_details_attributes][][qty_request]" class="form-control qty_request" required>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-info add_order_details">+</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

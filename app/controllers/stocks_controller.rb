@@ -4,7 +4,7 @@ class StocksController < ApplicationController
 
   # GET /stocks or /stocks.json
   def index
-    @stocks = Stock.all
+    @stocks = Stock.includes(:item)
   end
 
   # GET /stocks/1 or /stocks/1.json

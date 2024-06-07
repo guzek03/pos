@@ -24,7 +24,7 @@
                 <tbody>
                   <% @stocks.each do |stock| %>
                     <tr>
-                      <td align="center"><%= stock.item.try(:sku) %> - <%= stock.item.try(:name) %></td>
+                      <td><%= stock.item.try(:sku) %> - <%= stock.item.try(:name) %></td>
                       <td align="center"><%= stock.current_qty %></td>
                       <!-- <td nowrap class="text-center">
                         <a href="<%#= edit_stock_path(stock) %>" class="btn btn-icon btn-sm btn-warning">

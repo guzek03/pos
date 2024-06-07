@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  customer_name: MyString
+  invoice_number: MyString
+  invoice_date: 2024-06-07
+  state: 1
+
+two:
+  number: MyString
+  customer_name: MyString
+  invoice_number: MyString
+  invoice_date: 2024-06-07
+  state: 1

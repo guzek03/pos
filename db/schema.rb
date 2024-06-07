@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_05_070008) do
+ActiveRecord::Schema.define(version: 2024_06_07_035520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,31 @@ ActiveRecord::Schema.define(version: 2024_06_05_070008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uom_id"], name: "index_items_on_uom_id"
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.bigint "order_header_id"
+    t.bigint "item_id"
+    t.integer "qty_request", default: 0
+    t.integer "qty_available", default: 0
+    t.decimal "price_include", precision: 15, scale: 2, default: "0.0", null: false
+    t.decimal "price_exclude", precision: 15, scale: 2, default: "0.0", null: false
+    t.decimal "percentage_ppn", precision: 15, scale: 2, default: "0.0", null: false
+    t.boolean "is_confirm"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_order_details_on_item_id"
+    t.index ["order_header_id"], name: "index_order_details_on_order_header_id"
+  end
+
+  create_table "order_headers", force: :cascade do |t|
+    t.string "number"
+    t.string "customer_name"
+    t.string "invoice_number"
+    t.date "invoice_date"
+    t.integer "state", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "payments", force: :cascade do |t|
@@ -107,6 +132,8 @@ ActiveRecord::Schema.define(version: 2024_06_05_070008) do
   end
 
   add_foreign_key "items", "uoms"
+  add_foreign_key "order_details", "items"
+  add_foreign_key "order_details", "order_headers"
   add_foreign_key "prices", "items"
   add_foreign_key "receptions", "items"
   add_foreign_key "stocks", "items"

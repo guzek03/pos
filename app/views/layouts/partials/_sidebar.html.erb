@@ -61,6 +61,11 @@
               <span>Reception</span>
             </a>
           </li>
+          <li class="<%= params[:controller] == 'order_headers' ? 'active' : '' %>">
+            <a href="<%= order_headers_path %>" class="nav-link <%= params[:controller] == 'order_headers' ? 'toggled' : '' %>">
+              <span>Order</span>
+            </a>
+          </li>
         </ul>
       </li>
     </ul>

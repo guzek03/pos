@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @order_header.number %>
+</p>
+
+<p>
+  <strong>Customer name:</strong>
+  <%= @order_header.customer_name %>
+</p>
+
+<p>
+  <strong>Invoice number:</strong>
+  <%= @order_header.invoice_number %>
+</p>
+
+<p>
+  <strong>Invoice date:</strong>
+  <%= @order_header.invoice_date %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @order_header.state %>
+</p>
+
+<%= link_to 'Edit', edit_order_header_path(@order_header) %> |
+<%= link_to 'Back', order_headers_path %>
